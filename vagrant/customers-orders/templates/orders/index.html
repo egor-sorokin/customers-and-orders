@@ -4,7 +4,14 @@
 <h1>All orders</h1>
 
 <ul>
-    <li></li>
+    {% for i in orders %}
+    <li>
+        <p>{{ i.name}}</p>
+        <p>{{ i.description}}</p>
+        <p>{{ i.manufacturer}}</p>
+        <p>{{ i.price}}</p>
+    </li>
+    {% endfor %}
 </ul>
 
 {% endblock %}}

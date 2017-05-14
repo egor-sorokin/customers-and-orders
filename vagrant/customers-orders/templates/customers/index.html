@@ -4,7 +4,9 @@
 <h1>All customers</h1>
 
 <ul>
-    <li></li>
+    {% for i in customers %}
+    <li>{{ i.name}}</li>
+    {% endfor %}
 </ul>
 
 {% endblock %}}

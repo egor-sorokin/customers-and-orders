@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, abort
+from sqlalchemy import exc
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Customer, Order
@@ -12,45 +13,135 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-@app.route('/')
-@app.route('/customer')
+@app.route('/', methods=['GET'])
+@app.route('/customers', methods=['GET'])
 def show_customers():
-    return render_template('customers/index.html')
+    customers = session.query(Customer).all()
+    return render_template('customers/index.html', customers=customers)
 
-@app.route('/customer/new')
+
+@app.route('/customers/new', methods=['GET', 'POST'])
 def create_new_customer():
-    return render_template('customers/create.html')
+    if request.method == 'POST':
+        try:
+            newCustomer = Customer(name=request.form['name'])
+            session.add(newCustomer)
+            session.commit()
+
+        except exc.SQLAlchemyError:
+            print "Customer can't be created, database error"
+
+        return redirect(url_for('show_customers'))
+    else:
+        return render_template('customers/create.html')
 
 
-@app.route('/customer/<int:customer_id>/edit')
+@app.route('/customers/<int:customer_id>/edit', methods=['GET', 'POST'])
 def edit_customer(customer_id):
-    return render_template('customers/edit.html')
+    if request.method == 'POST':
+        try:
+            customer = session.query(Customer).filter_by(id=customer_id).one()
+
+            if request.form['name']:
+                customer.name = request.form['name']
+
+            session.add(customer)
+            session.commit()
+
+        except exc.SQLAlchemyError:
+            print "Customer can't be modified, database error"
+
+        return redirect(url_for('show_customers'))
+    else:
+        return render_template('customers/edit.html')
 
 
-@app.route('/customer/<int:customer_id>/delete')
+@app.route('/customers/<int:customer_id>/delete', methods=['GET', 'POST'])
 def delete_customer(customer_id):
-    return render_template('customers/delete.html')
+    if request.method == 'POST':
+        try:
+            customer = session.query(Customer).filter_by(id=customer_id).one()
+            session.delete(customer)
+            session.commit()
+        except exc.SQLAlchemyError:
+            print "Customer can't be deleted, database error"
+
+        return redirect(url_for('show_customers'))
+    else:
+        return render_template('customers/delete.html')
 
 
-@app.route('/customer/<int:customer_id>')
-@app.route('/customer/<int:customer_id>/orders')
+@app.route('/customers/<int:customer_id>', methods=['GET'])
+@app.route('/customers/<int:customer_id>/orders', methods=['GET'])
 def show_orders(customer_id):
-    return render_template('orders/index.html')
+    try:
+        orders = session.query(Order).filter_by(customer_id=customer_id)
+        return render_template('orders/index.html', orders=orders)
+    except exc.SQLAlchemyError:
+        print "Orders of this customer can't be found, database error"
 
 
-@app.route('/customer/<int:customer_id>/orders/new')
+@app.route('/customers/<int:customer_id>/orders/new', methods=['GET', 'POST'])
 def create_new_orders(customer_id):
-    return render_template('orders/create.html')
+    if request.method == 'POST':
+        try:
+            newOrder = Customer(name=request.form['name'], description=request.form['description'],
+                                manufacturer=request.form['manufacturer'], price=request.form['price'],
+                                customer_id=customer_id)
+            session.add(newOrder)
+            session.commit()
+
+        except exc.SQLAlchemyError:
+            print "Order can't be created, database error"
+
+        return redirect(url_for('show_orders'))
+    else:
+        return render_template('orders/create.html')
 
 
-@app.route('/customer/<int:customer_id>/orders/<int:orders_id>/edit')
+@app.route('/customers/<int:customer_id>/orders/<int:orders_id>/edit', methods=['GET', 'POST'])
 def edit_orders(customer_id, orders_id):
-    return render_template('orders/edit.html')
+    if request.method == 'POST':
+        try:
+            order = session.query(Order).filter_by(id=orders_id, customer_id=customer_id).one()
+
+            if request.form['name']:
+                order.name = request.form['name']
+
+            if request.form['description']:
+                order.name = request.form['description']
+
+            if request.form['manufacturer']:
+                order.name = request.form['manufacturer']
+
+            if request.form['price']:
+                order.name = request.form['price']
+
+            session.add(order)
+            session.commit()
+
+        except exc.SQLAlchemyError:
+            print "Order can't be modified, database error"
+
+        return redirect(url_for('show_orders'))
+    else:
+        return render_template('orders/edit.html')
 
 
-@app.route('/customer/<int:customer_id>/orders/<int:orders_id>/delete')
+@app.route('/customers/<int:customer_id>/orders/<int:orders_id>/delete', methods=['GET', 'POST'])
 def delete_orders(customer_id, orders_id):
-    return render_template('orders/delete.html')
+    if request.method == 'POST':
+        try:
+            order = session.query(Order).filter_by(id=orders_id, customer_id=customer_id).one()
+            session.delete(order)
+            session.commit()
+
+        except exc.SQLAlchemyError:
+            print "Order can't be deleted, database error"
+
+        return redirect(url_for('show_orders'))
+    else:
+        return render_template('orders/delete.html')
 
 
 if __name__ == '__main__':
