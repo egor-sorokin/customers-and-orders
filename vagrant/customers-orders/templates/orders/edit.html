@@ -3,18 +3,18 @@
 {% block content %}
 <h1>Edit the order</h1>
 
-<form action="#" method="post">
+<form action="{{ url_for('edit_order', customer_id=customer_id, order_id=order_id) }}" method="post">
     <label for="name">Name
-        <input type="text" id="name"  placeholder="">
+        <input type="text" id="name" name="name" placeholder="">
     </label>
     <label for="description">Description
-        <input type="text" id="description"  placeholder="">
+        <input type="text" id="description" name="description" placeholder="">
     </label>
     <label for="manufacturer">Manufacturer
-        <input type="text" id="manufacturer"  placeholder="">
+        <input type="text" id="manufacturer" name="manufacturer" placeholder="">
     </label>
     <label for="price">Price
-        <input type="text" id="price"  placeholder="">
+        <input type="text" id="price" name="price" placeholder="">
     </label>
 
     <button type="submit">Edit</button>
