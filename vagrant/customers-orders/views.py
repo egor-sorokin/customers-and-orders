@@ -82,7 +82,7 @@ def show_orders(customer_id):
 
 
 @app.route('/customers/<int:customer_id>/orders/new', methods=['GET', 'POST'])
-def create_new_orders(customer_id):
+def create_new_order(customer_id):
     if request.method == 'POST':
         try:
             newOrder = Customer(name=request.form['name'], description=request.form['description'],
@@ -96,14 +96,14 @@ def create_new_orders(customer_id):
 
         return redirect(url_for('show_orders'))
     else:
-        return render_template('orders/create.html')
+        return render_template('orders/create.html', customer_id=customer_id)
 
 
-@app.route('/customers/<int:customer_id>/orders/<int:orders_id>/edit', methods=['GET', 'POST'])
-def edit_orders(customer_id, orders_id):
+@app.route('/customers/<int:customer_id>/orders/<int:order_id>/edit', methods=['GET', 'POST'])
+def edit_order(customer_id, order_id):
     if request.method == 'POST':
         try:
-            order = session.query(Order).filter_by(id=orders_id, customer_id=customer_id).one()
+            order = session.query(Order).filter_by(id=order_id, customer_id=customer_id).one()
 
             if request.form['name']:
                 order.name = request.form['name']
@@ -125,14 +125,14 @@ def edit_orders(customer_id, orders_id):
 
         return redirect(url_for('show_orders'))
     else:
-        return render_template('orders/edit.html')
+        return render_template('orders/edit.html', customer_id=customer_id)
 
 
-@app.route('/customers/<int:customer_id>/orders/<int:orders_id>/delete', methods=['GET', 'POST'])
-def delete_orders(customer_id, orders_id):
+@app.route('/customers/<int:customer_id>/orders/<int:order_id>/delete', methods=['GET', 'POST'])
+def delete_order(customer_id, order_id):
     if request.method == 'POST':
         try:
-            order = session.query(Order).filter_by(id=orders_id, customer_id=customer_id).one()
+            order = session.query(Order).filter_by(id=order_id, customer_id=customer_id).one()
             session.delete(order)
             session.commit()
 
@@ -141,7 +141,7 @@ def delete_orders(customer_id, orders_id):
 
         return redirect(url_for('show_orders'))
     else:
-        return render_template('orders/delete.html')
+        return render_template('orders/delete.html', customer_id=customer_id)
 
 
 if __name__ == '__main__':

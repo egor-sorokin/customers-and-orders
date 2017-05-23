@@ -20,6 +20,6 @@
     <button type="submit">Edit</button>
 </form>
 
-<a href="#">Cancel</a>
+<a href="{{ url_for('show_orders', customer_id=customer_id) }}">Cancel</a>
 
 {% endblock %}}

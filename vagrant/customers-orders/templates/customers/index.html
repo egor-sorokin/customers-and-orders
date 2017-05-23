@@ -5,8 +5,18 @@
 
 <ul>
     {% for i in customers %}
-    <li>{{ i.name}}</li>
+    <li>
+        <h3>{{ i.name}}</h3>
+        <a href="{{ url_for('edit_customer', customer_id=i.id) }}" class="link">Edit</a>
+        <a href="{{ url_for('delete_customer', customer_id=i.id) }}" class="link">Delete</a>
+        <a href="{{ url_for('show_orders', customer_id=i.id) }}" class="link">Show orders</a>
+    </li>
+
     {% endfor %}
 </ul>
+
+<div>
+    <a href="{{ url_for('create_new_customer') }}" class="link">Create New Customer</a>
+</div>
 
 {% endblock %}}
