@@ -3,9 +3,9 @@
 {% block content %}
 <h1>Create new customer</h1>
 
-<form action="#" method="post">
+<form action="{{ url_for('create_new_customer') }}" method="post">
     <label for="name">Name
-        <input type="text" id="name">
+        <input type="text" id="name" name="name">
     </label>
 
     <button type="submit">Create</button>
