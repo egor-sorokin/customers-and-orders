@@ -38,10 +38,10 @@ def create_new_customer():
 
 @app.route('/customers/<int:customer_id>/edit', methods=['GET', 'POST'])
 def edit_customer(customer_id):
+    customer = session.query(Customer).filter_by(id=customer_id).one()
+
     if request.method == 'POST':
         try:
-            customer = session.query(Customer).filter_by(id=customer_id).one()
-
             if request.form['name']:
                 customer.name = request.form['name']
 
@@ -53,7 +53,7 @@ def edit_customer(customer_id):
 
         return redirect(url_for('show_customers'))
     else:
-        return render_template('customers/edit.html', customer_id=customer_id)
+        return render_template('customers/edit.html', customer_id=customer_id, customer=customer)
 
 
 @app.route('/customers/<int:customer_id>/delete', methods=['GET', 'POST'])
@@ -110,10 +110,10 @@ def create_new_order(customer_id):
 
 @app.route('/customers/<int:customer_id>/orders/<int:order_id>/edit', methods=['GET', 'POST'])
 def edit_order(customer_id, order_id):
+    order = session.query(Order).filter_by(id=order_id, customer_id=customer_id).one()
+
     if request.method == 'POST':
         try:
-            order = session.query(Order).filter_by(id=order_id, customer_id=customer_id).one()
-
             if request.form['name']:
                 order.name = request.form['name']
 
@@ -138,7 +138,7 @@ def edit_order(customer_id, order_id):
 
         return redirect(url_for('show_orders', customer_id=customer_id))
     else:
-        return render_template('orders/edit.html', customer_id=customer_id, order_id=order_id)
+        return render_template('orders/edit.html', customer_id=customer_id, order_id=order_id, order=order)
 
 
 @app.route('/customers/<int:customer_id>/orders/<int:order_id>/delete', methods=['GET', 'POST'])
