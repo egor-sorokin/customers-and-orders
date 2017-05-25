@@ -5,16 +5,16 @@
 
 <form action="{{ url_for('create_new_order', customer_id=customer_id) }}" method="post">
     <label for="name">Name
-        <input type="text" id="name" name="name" placeholder="">
+        <input type="text" id="name" name="name" placeholder="Name">
     </label>
     <label for="description">Description
-        <input type="text" id="description" name="description" placeholder="">
+        <input type="text" id="description" name="description" placeholder="Description">
     </label>
     <label for="manufacturer">Manufacturer
-        <input type="text" id="manufacturer" name="manufacturer" placeholder="">
+        <input type="text" id="manufacturer" name="manufacturer" placeholder="Manufacturer">
     </label>
     <label for="price">Price
-        <input type="text" id="price" name="price" placeholder="">
+        <input type="text" id="price" name="price" placeholder="Price">
     </label>
 
     <button type="submit">Create</button>
