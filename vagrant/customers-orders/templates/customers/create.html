@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Create new customer</h1>
 
-<form action="{{ url_for('create_new_customer') }}" method="post">
-    <label for="name">Name
-        <input type="text" id="name" name="name" placeholder="Name">
-    </label>
+<div class="container">
+    <h1 class="title">Create new customer</h1>
 
-    <button type="submit">Create</button>
-</form>
+    <form action="{{ url_for('create_new_customer') }}" method="post" class="form">
+        <label for="name" class="form__label">Name
+            <input type="text" id="name" class="form__input" name="name" placeholder="Name">
+        </label>
 
-<a href="{{ url_for('show_customers') }}">Cancel</a>
+        <button type="submit" class="form__button">Create</button>
+    </form>
+
+    <a href="{{ url_for('show_customers') }}" class="link">Cancel</a>
+</div>
 
 {% endblock %}}
