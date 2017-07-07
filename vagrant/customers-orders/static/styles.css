@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+    font-size: 100%;
+}
+
+html,
+body {
+    height: 100%;
+
+    line-height: 1;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+input:focus,
+textarea:focus,
+a:focus {
+    outline: none;
+    box-shadow: 0 0 0;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+input, textarea {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0 0;
+}
+
+button {
+    border: none;
+    background-color: #fff;
+}
+
+body {
+    position: relative;
+    font-size: 100%;
+}
+
+.link {
+    color: #33AC9F;
+    transition: color 0.5s ease;
+}
+
+.link:hover {
+    color: #2A2E30;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 500px;
+
+    padding: 20px 20px;
+
+    border: 2px solid rgba(136, 156, 152, 0.5);
+
+    transform: translateX(-250px) translateY(-50%);
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    color: #2A2E30;
+}
+
+.form {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.form__label {
+    font-size: 16px;
+    font-weight: 300;
+    color: #71CFC7;
+}
+
+.form__input {
+    width: 100%;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid rgba(113, 207, 199, 0.5);
+
+    font-size: 20px;
+}
+
+.form__button {
+    float: right;
+
+    padding: 8px 25px;
+    margin-top: 20px;
+    border: 3px solid #33AC9F;
+
+    transition: background-color 0.5s ease,
+    color 0.5s ease;
+
+    color: #2A2E30;
+}
+
+.form__button:hover {
+    background-color: #33AC9F;
+    color: #FFF;
+}
