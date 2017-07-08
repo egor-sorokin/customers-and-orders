@@ -70,6 +70,8 @@ body {
 .container {
     overflow: hidden;
 
+    position: relative;
+
     width: 500px;
 
     margin: 50px auto;
