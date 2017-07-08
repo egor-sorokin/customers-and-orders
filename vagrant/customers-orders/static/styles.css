@@ -47,6 +47,11 @@ body {
     font-size: 100%;
 }
 
+.wrapper {
+    overflow: hidden;
+    height: 100%;
+}
+
 .link {
     color: #33AC9F;
     transition: color 0.5s ease;
@@ -54,6 +59,12 @@ body {
 
 .link:hover {
     color: #2A2E30;
+}
+
+.link--align {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
 }
 
 .container {
@@ -99,7 +110,9 @@ body {
 
 .form__button {
     float: right;
+}
 
+.button {
     padding: 8px 25px;
     margin-top: 20px;
     border: 3px solid #33AC9F;
@@ -110,7 +123,35 @@ body {
     color: #2A2E30;
 }
 
-.form__button:hover {
+.button:hover {
     background-color: #33AC9F;
     color: #FFF;
+}
+
+.button__container {
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+.list {
+    padding: 50px 30px;
+}
+
+.list__item {
+    padding-bottom: 5px;
+
+    border-bottom: 1px solid rgba(113, 207, 199, 0.5);
+}
+
+.list__item:nth-child(n+2) {
+    margin-top: 30px;
+}
+
+.list__item-link-container {
+    margin-top: 10px;
+}
+
+.list__item-link:nth-child(n+2) {
+    margin-left: 10px;
 }

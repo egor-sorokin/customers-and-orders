@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>All customers</h1>
+    <div class="container">
+        <h1 class="title">All customers</h1>
 
-<ul>
-    {% for i in customers %}
-    <li>
-        <h3>{{ i.name}}</h3>
-        <a href="{{ url_for('edit_customer', customer_id=i.id) }}" class="link">Edit</a>
-        <a href="{{ url_for('delete_customer', customer_id=i.id) }}" class="link">Delete</a>
-        <a href="{{ url_for('show_orders', customer_id=i.id) }}" class="link">Show orders</a>
-    </li>
+        <ul class="list">
+            {% for i in customers %}
+                <li class="list__item">
+                    <h3 class="list__item-title">{{ i.name }}</h3>
+                    <div class="list__item-link-container">
+                        <a href="{{ url_for('edit_customer', customer_id=i.id) }}" class="list__item-link link">Edit</a>
+                        <a href="{{ url_for('delete_customer', customer_id=i.id) }}"
+                           class="list__item-link link">Delete</a>
+                        <a href="{{ url_for('show_orders', customer_id=i.id) }}" class="list__item-link link">Show
+                            orders</a>
+                    </div>
+                </li>
 
-    {% endfor %}
-</ul>
+            {% endfor %}
+        </ul>
 
-<div>
-    <a href="{{ url_for('create_new_customer') }}" class="link">Create New Customer</a>
-</div>
-
+        <div class="button__container">
+            <a href="{{ url_for('create_new_customer') }}" class="button">Create New Customer</a>
+        </div>
+    </div>
 {% endblock %}}
