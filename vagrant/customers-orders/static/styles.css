@@ -43,13 +43,13 @@ button {
 }
 
 body {
-    position: relative;
     font-size: 100%;
 }
 
 .wrapper {
-    overflow: hidden;
     height: 100%;
+
+    padding: 10px 0;
 }
 
 .link {
@@ -68,17 +68,14 @@ body {
 }
 
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    overflow: hidden;
 
     width: 500px;
 
+    margin: 50px auto;
     padding: 20px 20px;
 
     border: 2px solid rgba(136, 156, 152, 0.5);
-
-    transform: translateX(-250px) translateY(-50%);
 }
 
 .title {
@@ -129,9 +126,12 @@ body {
 }
 
 .button__container {
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-    text-align: center;
+    margin-bottom: 30px;
 }
 
 .list {
@@ -154,4 +154,8 @@ body {
 
 .list__item-link:nth-child(n+2) {
     margin-left: 10px;
+}
+
+.list__item p {
+    margin-top: 5px;
 }
