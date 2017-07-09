@@ -1,25 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>All orders</h1>
+    <div class="container">
+        <h1 class="title">All orders</h1>
 
-<ul>
-    {% for i in orders %}
-    <li>
-        <p>{{ i.name}}</p>
-        <p>{{ i.description}}</p>
-        <p>{{ i.manufacturer}}</p>
-        <p>{{ i.price}}</p>
-        <a href="{{ url_for('edit_order', customer_id=customer_id, order_id=i.id) }}" class="link">Edit</a>
-        <a href="{{ url_for('delete_order', customer_id=customer_id, order_id=i.id) }}" class="link">Delete</a>
-    </li>
-    {% endfor %}
-</ul>
-<div>
-    <a href="{{ url_for('create_new_order', customer_id=customer_id) }}" class="link">Add new order</a>
-</div>
-<div>
-    <a href="{{ url_for('show_customers') }}" class="link">Show customers</a>
-</div>
+        <ul class="list">
+            {% for i in orders %}
+                <li class="list__item">
+                {% if (i.name) %}
+                    <p>Name: {{ i.name }}</p>
+                {% endif %}
+                {% if (i.description) %}
+                    <p>Description: {{ i.description }}</p>
+                {% endif %}
+                {% if (i.manufacturer) %}
+                    <p>Manufacturer: {{ i.manufacturer }}</p>
+                {% endif %}
+                {% if (i.price) %}
+                    <p>Price: {{ i.price }}</p>
+                {% endif %}
+                    <div class="list__item-link-container">
+                        <a href="{{ url_for('edit_order', customer_id=customer_id, order_id=i.id) }}"
+                           class="list__item-link link">Edit</a>
+                        <a href="{{ url_for('delete_order', customer_id=customer_id, order_id=i.id) }}"
+                           class="list__item-link link">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
 
+        <div class="button__container">
+            <a href="{{ url_for('create_new_order', customer_id=customer_id) }}" class="button">Add new order</a>
+            <a href="{{ url_for('show_customers') }}" class="button">Show customers</a>
+        </div>
+    </div>
 {% endblock %}}
