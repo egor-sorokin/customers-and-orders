@@ -63,7 +63,7 @@ body {
 
 .link--align {
     position: absolute;
-    bottom: 30px;
+    bottom: 50px;
     left: 40px;
 }
 
@@ -75,7 +75,7 @@ body {
     width: 500px;
 
     margin: 50px auto;
-    padding: 20px 20px;
+    padding: 40px;
 
     border: 2px solid rgba(136, 156, 152, 0.5);
 }
@@ -87,7 +87,9 @@ body {
 }
 
 .form {
-    margin-top: 20px;
+    position: relative;
+
+    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -97,12 +99,20 @@ body {
     color: #71CFC7;
 }
 
+.form__input-container {
+    width: 100%;
+
+    border-bottom: 1px solid rgba(113, 207, 199, 0.5);
+}
+
+.form__input-container:nth-child(n+2) {
+    margin-top: 30px;
+}
+
 .form__input {
     width: 100%;
 
     padding: 10px 0;
-
-    border-bottom: 1px solid rgba(113, 207, 199, 0.5);
 
     font-size: 20px;
 }
@@ -137,7 +147,7 @@ body {
 }
 
 .list {
-    padding: 50px 30px;
+    padding: 50px 0;
 }
 
 .list__item {

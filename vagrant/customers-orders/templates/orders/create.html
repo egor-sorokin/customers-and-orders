@@ -1,25 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Create new order</h1>
+    <div class="container">
+        <h1 class="title">Create new order</h1>
 
-<form action="{{ url_for('create_new_order', customer_id=customer_id) }}" method="post">
-    <label for="name">Name
-        <input type="text" id="name" name="name" placeholder="Name">
-    </label>
-    <label for="description">Description
-        <input type="text" id="description" name="description" placeholder="Description">
-    </label>
-    <label for="manufacturer">Manufacturer
-        <input type="text" id="manufacturer" name="manufacturer" placeholder="Manufacturer">
-    </label>
-    <label for="price">Price
-        <input type="text" id="price" name="price" placeholder="Price">
-    </label>
+        <form action="{{ url_for('create_new_order', customer_id=customer_id) }}" method="post" class="form">
+            <div class="form__input-container">
+                <label for="name" class="form__label">Name</label>
+                <input type="text" id="name" class="form__input" name="name" placeholder="Name">
+            </div>
+            <div class="form__input-container">
+                <label for="description" class="form__label">Description</label>
+                <input type="text" id="description" class="form__input" name="description" placeholder="Description">
+            </div>
 
-    <button type="submit">Create</button>
-</form>
+            <div class="form__input-container">
+                <label for="manufacturer" class="form__label">Manufacturer</label>
+                <input type="text" id="manufacturer" class="form__input" name="manufacturer" placeholder="Manufacturer">
+            </div>
+            <div class="form__input-container">
+                <label for="price" class="form__label">Price</label>
+                <input type="text" id="price" class="form__input" name="price" placeholder="Price">
+            </div>
 
-<a href="{{ url_for('show_orders', customer_id=customer_id) }}">Cancel</a>
+            <button type="submit" class="form__button button">Create</button>
+        </form>
+
+        <a href="{{ url_for('show_orders', customer_id=customer_id) }}" class="link">Cancel</a>
+    </div>
 
 {% endblock %}}
